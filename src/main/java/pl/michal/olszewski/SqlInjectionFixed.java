@@ -30,7 +30,7 @@ public class SqlInjectionFixed {
     private static Connection getConnection() throws ClassNotFoundException, SQLException {
         Class.forName("com.mysql.cj.jdbc.Driver");
         return DriverManager.getConnection(
-                "jdbc:mysql://localhost:3306/dbname",
+                "jdbc:mysql://localhost:3306/dbname?logger=com.mysql.cj.log.Slf4JLogger&profileSQL=true",
                 "username",
                 "password");
     }
