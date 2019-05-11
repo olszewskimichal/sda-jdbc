@@ -5,19 +5,24 @@ import java.sql.*;
 public class CreateStatement {
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
         Connection connection = getConnection();
-        Statement statement = connection.createStatement();
 
-        createTable(statement);
+        createTable(connection.createStatement());
 
-        insertSomeValuesToTable(statement);
+        insertSomeValuesToTable(connection.createStatement());
 
-        selectValuesGetByColumnIndex(statement);
 
-        //selectValuesGetByColumnNames(statement);
 
-        dropTable(statement);
 
-        closeConnections(connection, statement);
+
+
+
+
+
+
+
+
+
+
     }
 
     private static void closeConnections(Connection connection, Statement statement) throws SQLException {
@@ -30,7 +35,8 @@ public class CreateStatement {
     }
 
     private static void selectValuesGetByColumnIndex(Statement statement) throws SQLException {
-        ResultSet resultSet = statement.executeQuery("select name,salary from employee");
+        ResultSet resultSet = statement
+                .executeQuery("select name,salary from employee");
         while (resultSet.next()){
             System.out.println(resultSet.getString(1));
             System.out.println(resultSet.getInt(2));
@@ -39,7 +45,8 @@ public class CreateStatement {
     }
 
     private static void selectValuesGetByColumnNames(Statement statement) throws SQLException {
-        ResultSet resultSet2 = statement.executeQuery("select name,salary from employee");
+        ResultSet resultSet2 = statement
+                .executeQuery("select name,salary from employee");
         while (resultSet2.next()){
             System.out.println(resultSet2.getString("name"));
             System.out.println(resultSet2.getInt("salary"));
@@ -63,7 +70,7 @@ public class CreateStatement {
     private static Connection getConnection() throws ClassNotFoundException, SQLException {
         Class.forName("com.mysql.cj.jdbc.Driver");
         return DriverManager.getConnection(
-                "jdbc:mysql://localhost:3306/dbname",
+                "jdbc:mysql://localhost:3306/dbname?serverTimezone=UTC",
                 "username",
                 "password");
     }

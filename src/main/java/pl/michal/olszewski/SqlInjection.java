@@ -8,6 +8,9 @@ public class SqlInjection {
         Statement statement = connection.createStatement();
         //String name="name5";
         String name="1' or '1'='1";
+
+
+
         ResultSet resultSet2 = statement.executeQuery("select name,salary from employee where name = '"+name+"'");
         while (resultSet2.next()){
             System.out.println(resultSet2.getString("name"));
@@ -26,7 +29,7 @@ public class SqlInjection {
     private static Connection getConnection() throws ClassNotFoundException, SQLException {
         Class.forName("com.mysql.cj.jdbc.Driver");
         return DriverManager.getConnection(
-                "jdbc:mysql://localhost:3306/dbname?logger=com.mysql.cj.log.Slf4JLogger&profileSQL=true",
+                "jdbc:mysql://localhost:3306/dbname?serverTimezone=UTC&logger=com.mysql.cj.log.Slf4JLogger&profileSQL=true",
                 "username",
                 "password");
     }

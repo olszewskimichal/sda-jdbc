@@ -6,8 +6,8 @@ public class SqlInjectionFixed {
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
         Connection connection = getConnection();
         Statement statement = connection.createStatement();
-        String name="name5";
-        //String name = "1' or '1'='1";
+        //String name="name5";
+        String name = "1' or '1'='1";
         PreparedStatement preparedStatement = connection
                 .prepareStatement("select name,salary from employee where name =?");
         preparedStatement
@@ -30,7 +30,7 @@ public class SqlInjectionFixed {
     private static Connection getConnection() throws ClassNotFoundException, SQLException {
         Class.forName("com.mysql.cj.jdbc.Driver");
         return DriverManager.getConnection(
-                "jdbc:mysql://localhost:3306/dbname?logger=com.mysql.cj.log.Slf4JLogger&profileSQL=true",
+                "jdbc:mysql://localhost:3306/dbname?serverTimezone=UTC&logger=com.mysql.cj.log.Slf4JLogger&profileSQL=true",
                 "username",
                 "password");
     }

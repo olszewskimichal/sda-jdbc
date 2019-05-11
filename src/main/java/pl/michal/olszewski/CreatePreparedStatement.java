@@ -41,7 +41,7 @@ public class CreatePreparedStatement {
     private static Connection getConnection() throws ClassNotFoundException, SQLException {
         Class.forName("com.mysql.cj.jdbc.Driver");
         return DriverManager.getConnection(
-                "jdbc:mysql://localhost:3306/dbname",
+                "jdbc:mysql://localhost:3306/dbname?serverTimezone=UTC",
                 "username",
                 "password");
     }
